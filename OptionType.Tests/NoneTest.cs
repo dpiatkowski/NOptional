@@ -1,34 +1,43 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace whiteshore.OptionType.Tests
 {
-    [TestClass]
     public class NoneTest
     {
-        [TestMethod]
-        public void BuildViaConstructorIsCorrect()
+        [Fact]
+        public void BuildNoneViaConstructor()
         {
             var maybe = new None<string>();
 
-            Assert.IsFalse(maybe.HasValue);
+            Assert.False(maybe.HasValue);
         }
 
-        [TestMethod]
-        public void BuildViaFactoryMethodIsCorrect()
+        [Fact]
+        public void BuildNoneViaFactoryMethod()
         {
             var maybe = Option.Of((string) null);
 
-            Assert.IsFalse(maybe.HasValue);
+            Assert.False(maybe.HasValue);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [Fact]
         public void GettingValueFromNoneThrowsAnException()
         {
             var maybe = Option.Of((string)null);
 
-            var value= maybe.Value;
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var value = maybe.Value;
+            });
+        }
+
+        [Fact]
+        public void NoneToStringEqualsNone()
+        {
+            var maybe = Option.None<object>();
+
+            Assert.Equal("None", maybe.ToString());
         }
     }
 }

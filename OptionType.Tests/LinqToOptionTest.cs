@@ -1,34 +1,32 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace whiteshore.OptionType.Tests
 {
-    [TestClass]
     public class LinqToOptionTest
     {
-        [TestMethod]
+        [Fact]
         public void AddingTwoPresentNumberWorks()
         {
             var value = from a in 5.AsOption()
                         from b in 3.AsOption()
                         select a + b;
 
-            Assert.AreEqual(value.Value, 8);
+            Assert.Equal(value.Value, 8);
         }
 
-        [TestMethod]
+        [Fact]
         public void AddingTwoNumberWhereOneIsAbsentYieldsNone()
         {
             var value = from a in 5.AsOption()
                         from b in new None<int>()
                         select a + b;
 
-            Assert.IsFalse(value.HasValue);
+            Assert.False(value.HasValue);
         }
 
-        [TestMethod]
+        [Fact]
         public void LoopingOverSomeWorks()
         {
             const string stringValue = "foo";
@@ -39,11 +37,11 @@ namespace whiteshore.OptionType.Tests
                 result.Add(value);
             }
 
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result[0], stringValue);
+            Assert.Equal(result.Count, 1);
+            Assert.Equal(result[0], stringValue);
         }
 
-        [TestMethod]
+        [Fact]
         public void LoopingOverNoneYieldsEmptySeq()
         {
             var result = new List<string>();
@@ -52,20 +50,20 @@ namespace whiteshore.OptionType.Tests
                 result.Add(value);
             }
 
-            Assert.AreEqual(result.Count, 0);
+            Assert.Equal(result.Count, 0);
         }
 
-        [TestMethod]
+        [Fact]
         public void ProjectingSomeWorks()
         {
             const string stringValue = "foo";
-            Assert.AreEqual(Option.Of(stringValue).Select(x => x).First(), stringValue);
+            Assert.Equal(Option.Of(stringValue).Select(x => x).First(), stringValue);
         }
 
-        [TestMethod]
+        [Fact]
         public void ProjectingNoneYieldsEmptySeq()
         {
-            Assert.IsFalse(Option.None<string>().Select(x => x).Any());
+            Assert.False(Option.None<string>().Select(x => x).Any());
         }
     }
 }

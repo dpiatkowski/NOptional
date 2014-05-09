@@ -40,5 +40,14 @@ namespace whiteshore.OptionType
         {
             return GetEnumerator();
         }
+
+        /// <summary>
+        /// String representation of None
+        /// </summary>
+        /// <returns>None</returns>
+        public override string ToString()
+        {
+            return "None";
+        }
     }
 }

@@ -1,30 +1,36 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using whiteshore.OptionType;
+﻿using whiteshore.OptionType;
+using Xunit;
 
 namespace OptionType.Tests
 {
-    [TestClass]
     public class SomeTest
     {
         private const string InnerValue = "Lorem ipsum";
 
-        [TestMethod]
-        public void BuildViaConstructorIsCorrect()
+        [Fact]
+        public void BuildSomeViaConstructor()
         {
             var maybe = new Some<string>(InnerValue);
 
-            Assert.IsTrue(maybe.HasValue);
-            Assert.AreEqual(maybe.Value, InnerValue);
+            Assert.True(maybe.HasValue);
+            Assert.Equal(maybe.Value, InnerValue);
         }
 
-        [TestMethod]
-        public void BuildViaFactoryMethodIsCorrect()
+        [Fact]
+        public void BuildSomeViaFactoryMethod()
         {
             var maybe = Option.Of(InnerValue);
 
-            Assert.IsTrue(maybe.HasValue);
-            Assert.AreEqual(maybe.Value, InnerValue);
+            Assert.True(maybe.HasValue);
+            Assert.Equal(maybe.Value, InnerValue);
+        }
+
+        [Fact]
+        public void ToStringYieldsInnerValue()
+        {
+            var maybe = Option.Of(InnerValue);
+
+            Assert.Equal(InnerValue, maybe.ToString());
         }
     }
 }
