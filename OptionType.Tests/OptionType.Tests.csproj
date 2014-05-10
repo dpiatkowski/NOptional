@@ -51,6 +51,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="LinqToNullablesTests.cs" />
     <Compile Include="LinqToOptionTest.cs" />
     <Compile Include="NoneTest.cs" />
     <Compile Include="SomeTest.cs" />
