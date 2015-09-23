@@ -1,8 +1,8 @@
 # OptionType
 
-Experimental and boring implementation of Option monad in C#.
+.NET port of Java Optional type.
 
 ## Rationale
 
-We all don't like null references crawling in our code and causing NullReferenceExceptions. Here's the solution.
+We all don't like null references crawling in our code and causing NullReferenceExceptions.
 

@@ -23,9 +23,9 @@ namespace NOptional.Tests
         {
             var hello = "hello".AsOption();
 
-            var helloWorld = from hh in Replicate(hello) select hh;
+            var helloWorld = hello.Select(h => Optional<string>.Of(h + "world"));
 
-            Assert.Equal("hellohello", helloWorld.First());
+            Assert.Equal("helloworld", helloWorld.Get());
         }
 
         [Fact]
@@ -33,21 +33,9 @@ namespace NOptional.Tests
         {
             var none = Optional<string>.Empty;
 
-            var helloWorld = from hh in Replicate(none) select hh;
+            var helloWorld = none.Select(h => Optional<string>.Of(h + "world"));
 
-            Assert.False(helloWorld.Any());
-        }
-
-        private Optional<string> Replicate(Optional<string> optionalString)
-        {
-            if (optionalString.IsPresent)
-            {
-                var value = optionalString.Get();
-
-                return Optional<string>.Of(value + value);
-            }
-
-            return Optional<string>.Empty;
+            Assert.False(helloWorld.IsPresent);
         }
     }
 }

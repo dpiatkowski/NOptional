@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace NOptional
 {
+    /// <summary>
+    /// Represents value that may or may not exist, and it's existence can be checked at compile-time
+    /// </summary>
+    /// <typeparam name="T">Refence type</typeparam>
     public class Optional<T> : IEnumerable<T>, IEquatable<Optional<T>> where T : class
     {
         private readonly T _value;
